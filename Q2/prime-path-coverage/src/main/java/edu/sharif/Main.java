@@ -1,6 +1,9 @@
 package edu.sharif;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -22,16 +25,14 @@ public class Main {
 
         System.out.print("Please enter the number of nodes: ");
         var numberOfNodes = scanner.nextInt();
-
-        System.out.print("Please enter the number of edges: ");
-        var numberOfEdges = scanner.nextInt();
-
         var nodes = new ArrayList<String>();
         for (var i = 0; i < numberOfNodes; i++) {
             System.out.printf("Please enter the name of node %d: ", i + 1);
             nodes.add(scanner.next());
         }
 
+        System.out.print("Please enter the number of edges: ");
+        var numberOfEdges = scanner.nextInt();
         var edges = new HashMap<String, List<String>>();
         for (var node : nodes) {
             edges.put(node, new ArrayList<>());
@@ -45,6 +46,25 @@ public class Main {
 
             edges.get(source).add(target);
         }
+
+        System.out.print("Please enter the number of initial nodes: ");
+        var numberOfInitialNodes = scanner.nextInt();
+        var initialNodes = new ArrayList<String>();
+        for (var i = 0; i < numberOfInitialNodes; i++) {
+            System.out.printf("Please enter the name of initial node %d: ", i + 1);
+            initialNodes.add(scanner.next());
+        }
+
+        System.out.print("Please enter the number of final nodes: ");
+        var numberOfFinalNodes = scanner.nextInt();
+        var finalNodes = new ArrayList<String>();
+        for (var i = 0; i < numberOfFinalNodes; i++) {
+            System.out.printf("Please enter the name of final node %d: ", i + 1);
+            finalNodes.add(scanner.next());
+        }
+
+        var validator = new Validator();
+        validator.validate(nodes, edges, initialNodes, finalNodes);
 
         return new Graph(nodes, edges);
     }
